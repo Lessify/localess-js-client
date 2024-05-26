@@ -13,6 +13,7 @@
   ],
   "author": "Alex Cibotari <alexandru.cibotari@gmail.com>",
   "homepage": "https://localess.org",
+  "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -20,7 +21,6 @@
   ],
   "exports": {
     "import": "./dist/index.js",
-    "require": "./dist/index.umd.cjs",
     "types": "./dist/index.d.ts"
   },
   "repository": {
@@ -31,7 +31,8 @@
     "url": "https://github.com/Lessify/localess-js-client/issues"
   },
   "scripts": {
-    "build": "vite build && tsc -p tsconfig.json --emitDeclarationOnly"
+    "build": "tsc -p tsconfig.json",
+    "build:vite": "vite build && tsc -p tsconfig.json --emitDeclarationOnly"
   },
   "license": "MIT",
   "dependencies": {

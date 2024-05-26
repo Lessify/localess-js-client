@@ -12,7 +12,7 @@ export default defineConfig({
       entry: './src/index.ts',
       fileName: 'index',
       name: 'localess',
-      formats: ['es', 'cjs', 'umd'],
+      formats: ['es'],
     }
   }
 })
