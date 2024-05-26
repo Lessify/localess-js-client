@@ -1,0 +1,34 @@
+---
+
+name: Build and Push NPM Package
+
+on:
+  push:
+    branches: [main]
+    # Only build when files in these directories have been changed
+    paths:
+      - src/**
+      - package.json
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org"
+          cache: npm
+      - name: Install & Build 🏗️
+        run: |
+          npm install
+          npm run build
+      - name: Change version
+        run: npm --no-git-tag-version version prerelease --preid $(date +'%Y%m%d-%H%M%S')
+      - name: Publish package on NPM 📦
+        run: npm publish --access public --tag next dist
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

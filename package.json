@@ -4,7 +4,12 @@
   "type": "module",
   "description": "Universal JavaScript/TypeScript SDK for Localess's API.",
   "keywords": [
-    "localess", "sdk", "api", "client", "javascript", "typescript"
+    "localess",
+    "sdk",
+    "api",
+    "client",
+    "javascript",
+    "typescript"
   ],
   "author": "Alex Cibotari <alexandru.cibotari@gmail.com>",
   "homepage": "https://localess.org",
@@ -21,8 +26,7 @@
     "url": "https://github.com/Lessify/localess-js-client/issues"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "postbuild": "shx cp package.json dist/ && shx cp README.md dist/"
+    "build": "tsc -p tsconfig.json"
   },
   "license": "MIT",
   "dependencies": {
@@ -31,7 +35,6 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
-    "shx": "^0.3.4",
     "typescript": "^5.0.0"
   },
   "engines": {
