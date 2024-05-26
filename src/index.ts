@@ -7,7 +7,8 @@ export * from './models';
 
 export type LocalessClientOptions = {
   /**
-   * A fully qualified domain name with protocol (http/https) and port
+   * A fully qualified domain name with protocol (http/https) and port.
+   *
    * Example: https://localess-prod.web.app
    */
   origin: string;
@@ -17,6 +18,8 @@ export type LocalessClientOptions = {
   version?: 'draft';
   /**
    * Locale to fetch content in, leave empty for default locale
+   *
+   * Example: en
    */
   locale?: string;
   /**
