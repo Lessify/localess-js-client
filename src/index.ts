@@ -53,7 +53,7 @@ export function localessClient(options: LocalessClientOptions) {
       if (options.debug) {
         console.log('getLinks()');
       }
-      let url = `${origin}/api/v1/spaces/${options.spaceId}/links?token=${options.token}`;
+      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/links?token=${options.token}`;
       if (options.debug) {
         console.log('getLinks url : ', url);
       }
@@ -66,7 +66,7 @@ export function localessClient(options: LocalessClientOptions) {
       if (options.debug) {
         console.log('getContentBySlug() slug : ', slug);
       }
-      let url = `${origin}/api/v1/spaces/${options.spaceId}/contents/slugs/${slug}?token=${options.token}${version}${locale}`;
+      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/slugs/${slug}?token=${options.token}${version}${locale}`;
       if (options.debug) {
         console.log('getContentBySlug url : ', url);
       }
@@ -79,7 +79,7 @@ export function localessClient(options: LocalessClientOptions) {
       if (options.debug) {
         console.log('getContentById() id : ', id);
       }
-      let url = `${origin}/api/v1/spaces/${options.spaceId}/contents/${id}?token=${options.token}${version}${locale}`;
+      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/${id}?token=${options.token}${version}${locale}`;
       if (options.debug) {
         console.log('getContentById url : ', url);
       }
@@ -92,7 +92,7 @@ export function localessClient(options: LocalessClientOptions) {
       if (options.debug) {
         console.log('getTranslations()');
       }
-      let url = `${origin}/api/v1/spaces/${options.spaceId}/translations/${locale || 'en'}`;
+      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/translations/${locale || 'en'}`;
       if (options.debug) {
         console.log('getTranslations url : ', url);
       }
@@ -102,14 +102,14 @@ export function localessClient(options: LocalessClientOptions) {
     },
 
     syncScriptUrl(): string {
-      return `${origin}/scripts/sync-v1.js`
+      return `${options.origin}/scripts/sync-v1.js`
     },
 
     assetLink(asset: ContentAsset | string): string {
       if (typeof asset === 'string') {
-        return `${origin}/api/v1/spaces/${options.spaceId}/assets/${asset}`;
+        return `${options.origin}/api/v1/spaces/${options.spaceId}/assets/${asset}`;
       } else {
-        return `${origin}/api/v1/spaces/${options.spaceId}/assets/${asset.uri}`;
+        return `${options.origin}/api/v1/spaces/${options.spaceId}/assets/${asset.uri}`;
       }
     }
   }
