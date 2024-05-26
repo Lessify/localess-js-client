@@ -22,13 +22,13 @@ jobs:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
           cache: npm
-      - name: Install & Build 🏗️
-        run: |
-          npm install
-          npm run build
+      - name: Install 🏗️
+        run: npm install
+      - name: Build 🏗️
+        run: npm run build
       - name: Change version
         run: npm --no-git-tag-version version prerelease --preid $(date +'%Y%m%d-%H%M%S')
       - name: Publish package on NPM 📦
-        run: npm publish --access public --tag next dist
+        run: npm publish --access public --tag next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
