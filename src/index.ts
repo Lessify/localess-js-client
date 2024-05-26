@@ -4,6 +4,7 @@ import {proxyURIFromEnv} from "./utils";
 import {Content, ContentAsset, Links, Translations} from "./models";
 
 export * from './models';
+export * from './utils';
 
 export type LocalessClientOptions = {
   /**
