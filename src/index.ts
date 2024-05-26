@@ -29,9 +29,16 @@ export type LocalessClientOptions = {
    * Localess API token, can be found in the Localess Space settings
    */
   token: string;
+  /**
+   * Enable debug mode
+   */
+  debug?: boolean;
 }
 
 export function localessClient(options: LocalessClientOptions) {
+  if(options.debug) {
+    console.log('Localess Client Options : ', options);
+  }
   const fetchOptions: RequestInit = {
     redirect: 'follow',
   };
@@ -43,25 +50,53 @@ export function localessClient(options: LocalessClientOptions) {
   return {
 
     async getLinks(): Promise<Links> {
-      const response = await fetch(`${origin}/api/v1/spaces/${options.spaceId}/links?token=${options.token}`, fetchOptions)
+      if (options.debug) {
+        console.log('getLinks()');
+      }
+      let url = `${origin}/api/v1/spaces/${options.spaceId}/links?token=${options.token}`;
+      if (options.debug) {
+        console.log('getLinks url : ', url);
+      }
+      const response = await fetch(url, fetchOptions)
       const data = await response.json();
       return data as Links;
     },
 
     async getContentBySlug(slug: string): Promise<Content> {
-      const response = await fetch(`${origin}/api/v1/spaces/${options.spaceId}/contents/slugs/${slug}?token=${options.token}${version}${locale}`, fetchOptions)
+      if (options.debug) {
+        console.log('getContentBySlug() slug : ', slug);
+      }
+      let url = `${origin}/api/v1/spaces/${options.spaceId}/contents/slugs/${slug}?token=${options.token}${version}${locale}`;
+      if (options.debug) {
+        console.log('getContentBySlug url : ', url);
+      }
+      const response = await fetch(url, fetchOptions)
       const data = await response.json();
       return data as Content;
     },
 
     async getContentById(id: string): Promise<Content> {
-      const response = await fetch(`${origin}/api/v1/spaces/${options.spaceId}/contents/${id}?token=${options.token}${version}${locale}`, fetchOptions)
+      if (options.debug) {
+        console.log('getContentById() id : ', id);
+      }
+      let url = `${origin}/api/v1/spaces/${options.spaceId}/contents/${id}?token=${options.token}${version}${locale}`;
+      if (options.debug) {
+        console.log('getContentById url : ', url);
+      }
+      const response = await fetch(url, fetchOptions)
       const data = await response.json();
       return data as Content;
     },
 
     async getTranslations(): Promise<Translations> {
-      const response = await fetch(`${origin}/api/v1/spaces/${options.spaceId}/translations/${locale || 'en'}`, fetchOptions)
+      if (options.debug) {
+        console.log('getTranslations()');
+      }
+      let url = `${origin}/api/v1/spaces/${options.spaceId}/translations/${locale || 'en'}`;
+      if (options.debug) {
+        console.log('getTranslations url : ', url);
+      }
+      const response = await fetch(url, fetchOptions)
       const data = await response.json();
       return data as Translations;
     },
