@@ -1,6 +1,6 @@
 ---
 
-name: NEXT Build and Push NPM Package
+name: RELEASE Build and Push NPM Package
 
 on:
   push:
