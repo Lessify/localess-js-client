@@ -18,6 +18,6 @@
   },
   "include": ["src/*.ts", "src/**/*.ts"],
   "ts-node": {
-    "esm": true, // «———— enabling ESM for ts-node
+    "esm": true,
   }
 }
