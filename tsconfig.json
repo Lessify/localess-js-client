@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "ES2020",
     "outDir": "dist",
     "lib": ["ESNext", "DOM"],
     "esModuleInterop": true,

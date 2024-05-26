@@ -18,6 +18,10 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./models": "./dist/models/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lessify/localess-js-client.git"
