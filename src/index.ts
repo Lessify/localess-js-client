@@ -1,10 +1,8 @@
 import {ProxyAgent} from 'proxy-agent';
 import fetch, {RequestInit} from 'node-fetch';
-import {proxyURIFromEnv} from "./utils";
 import {Content, ContentAsset, Links, Translations} from "./models";
 
 export * from './models';
-export * from './utils';
 
 export type LocalessClientOptions = {
   /**
@@ -97,4 +95,14 @@ declare global {
   interface Window {
     localess?: LocalessSync;
   }
+}
+
+function proxyURIFromEnv(): string | undefined {
+  return (
+    process.env.HTTPS_PROXY ||
+    process.env.https_proxy ||
+    process.env.HTTP_PROXY ||
+    process.env.http_proxy ||
+    undefined
+  );
 }
