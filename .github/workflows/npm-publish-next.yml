@@ -27,7 +27,7 @@ jobs:
       - name: Build 🏗️
         run: npm run build
       - name: Change version
-        run: npm --no-git-tag-version version prerelease --preid next-$(date +'%Y%m%d-%H%M%S')
+        run: npm --no-git-tag-version version prerelease --preid next.$(date +'%Y%m%d-%H%M%S')
       - name: Publish package on NPM 📦
         run: npm publish --access public --tag next
         env:
