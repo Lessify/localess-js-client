@@ -30,7 +30,7 @@
     "url": "https://github.com/Lessify/localess-js-client/issues"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "vite build && tsc -p tsconfig.json"
   },
   "license": "MIT",
   "dependencies": {
@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
+    "vite": "^5.2.11",
     "typescript": "^5.0.0"
   },
   "engines": {
