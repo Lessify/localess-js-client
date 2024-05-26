@@ -19,8 +19,9 @@
     "dist"
   ],
   "exports": {
-    ".": "./dist/index.js",
-    "./models": "./dist/models/index.js"
+    "import": "./dist/index.js",
+    "require": "./dist/index.umd.cjs",
+    "types": "./dist/index.d.ts"
   },
   "repository": {
     "type": "git",
