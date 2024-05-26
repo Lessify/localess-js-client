@@ -15,7 +15,7 @@ export type LocalessClientOptions = {
   /**
    * Content version to fetch, leave empty for 'published' or 'draft' for the latest draft
    */
-  version?: 'draft';
+  version?: 'draft' | string;
   /**
    * Locale to fetch content in, leave empty for default locale
    *
