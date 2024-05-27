@@ -5,7 +5,5 @@ export default defineConfig({
   clean: true,
   minify: true,
   dts: true,
-  entry: {
-    lib: 'src/index.ts',
-  },
+  entry: ['src/index.ts']
 })

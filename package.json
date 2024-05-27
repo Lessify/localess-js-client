@@ -17,9 +17,9 @@
     "dist"
   ],
   "exports": {
-    "types": "./dist/lib.d.ts",
-    "require": "./dist/lib.js",
-    "import": "./dist/lib.mjs"
+    "types": "./dist/index.d.ts",
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs"
   },
   "repository": {
     "type": "git",
