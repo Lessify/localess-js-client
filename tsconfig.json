@@ -1,23 +1,37 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "allowJs": true,
+    "lib": ["ESNext", "DOM"],
     "target": "ESNext",
     "module": "ESNext",
-    "outDir": "dist",
-    "lib": ["ESNext", "DOM"],
-    "esModuleInterop": true,
-    "declaration": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitAny": false,
+    "moduleDetection": "force",
+    "allowJs": true,
+
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "preserveConstEnums": true,
+    "noEmit": true,
+
     "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "moduleResolution": "node",
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true
+//    "allowJs": true,
+//    "target": "ESNext",
+//    "module": "ESNext",
+//    "outDir": "dist",
+//    "lib": ["ESNext", "DOM"],
+//    "esModuleInterop": true,
+//    "declaration": true,
+//    "forceConsistentCasingInFileNames": true,
+//    "strict": true,
+//    "noImplicitAny": false,
+//    "skipLibCheck": true,
+//    "resolveJsonModule": true,
+//    "sourceMap": true,
+//    "moduleResolution": "Bundler"
   },
   "include": ["src/*.ts", "src/**/*.ts"],
-  "ts-node": {
-    "esm": true,
-  }
+  "exclude": ["node_modules"]
 }
