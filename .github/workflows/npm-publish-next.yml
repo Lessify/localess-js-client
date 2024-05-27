@@ -9,6 +9,7 @@ on:
     paths:
       - src/**
       - package.json
+      - tsconfig.cjs.json
       - tsconfig.json
 
 jobs:
