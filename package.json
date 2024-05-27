@@ -17,7 +17,7 @@
     "dist"
   ],
   "exports": {
-    "types": "./dist/lib.d.mts",
+    "types": "./dist/lib.d.ts",
     "require": "./dist/lib.js",
     "import": "./dist/lib.mjs"
   },
