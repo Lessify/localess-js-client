@@ -30,7 +30,7 @@ export type ContentFetchParams = {
   /**
    * Content version to fetch, leave empty for 'published' or 'draft' for the latest draft
    */
-  version?: 'draft' | 'published';
+  version?: 'draft' | string;
   /**
    * Locale identifier (ISO 639-1) to fetch content in, leave empty for default locale.
    *
