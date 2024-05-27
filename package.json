@@ -13,16 +13,11 @@
   "author": "Lessify",
   "homepage": "https://localess.org",
   "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lessify/localess-js-client.git"
@@ -31,7 +26,7 @@
     "url": "https://github.com/Lessify/localess-js-client/issues"
   },
   "scripts": {
-    "build": "tsup-node --env.NODE_ENV production",
+    "build": "tsc -p tsconfig.json",
     "build:tsc": "tsc -p tsconfig.json",
     "build:tsup": "tsup-node --env.NODE_ENV production"
   },
