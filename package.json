@@ -13,12 +13,18 @@
   "author": "Lessify",
   "homepage": "https://localess.org",
   "sideEffects": false,
-  "main": "./dist/cjs/index.js",
-  "types": "./dist/index.d.ts",
-  "module": "./dist/index.js",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js",
+      "node": "./dist/cjs/index.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lessify/localess-js-client.git"
