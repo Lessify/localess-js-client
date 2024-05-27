@@ -37,11 +37,8 @@ const llClient = localessClient({
   token: 'Baz00KaT0KeN8S3CureLL' // Localess API token, can be found in the Localess Space settings
 });
 
-
-    llClient.getLinks() // Fetch all Content Links
+llClient.getLinks() // Fetch all Content Links
+llClient.getContentBySlug('docs/overview') // Fetch content by SLUG
+llClient.getContentById('FRnIT7CUABoRCdSVVGGs') // Fetch content by ID
+llClient.getTranslations('en') // Fetch translations by locale
 ````
-
-
-[comment]: <> (`npm init --scope=localess`)
-[comment]: <> (`npm run build`)
-[comment]: <> (`npm publish --access public dist`)
