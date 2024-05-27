@@ -1,4 +1,4 @@
 /**
  * ContentData defined Object to connect all possible root Schemas.
  */
-export type ContentData = unknown;
+export type ContentData = any;
