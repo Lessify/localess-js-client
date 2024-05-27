@@ -10,7 +10,7 @@
     "javascript",
     "typescript"
   ],
-  "author": "Alex Cibotari <alexandru.cibotari@gmail.com>",
+  "author": "Lessify",
   "homepage": "https://localess.org",
   "sideEffects": false,
   "main": "./dist/index.js",
@@ -30,8 +30,7 @@
     "url": "https://github.com/Lessify/localess-js-client/issues"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "build:vite": "vite build && tsc -p tsconfig.json --emitDeclarationOnly"
+    "build": "tsc -p tsconfig.json"
   },
   "license": "MIT",
   "dependencies": {
@@ -40,7 +39,6 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
-    "vite": "^5.2.11",
     "typescript": "^5.0.0"
   },
   "engines": {

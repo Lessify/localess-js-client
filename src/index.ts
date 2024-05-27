@@ -1,6 +1,7 @@
 import {ProxyAgent} from 'proxy-agent';
 import fetch, {RequestInit} from 'node-fetch';
 import {Content, ContentAsset, Links, Translations} from "./models";
+import {FG_BLUE, proxyURIFromEnv, RESET} from "./utils";
 
 export * from './models';
 
@@ -35,9 +36,11 @@ export type LocalessClientOptions = {
   debug?: boolean;
 }
 
+const LOG_GROUP = `${FG_BLUE}[Localess]${RESET}`
+
 export function localessClient(options: LocalessClientOptions) {
   if(options.debug) {
-    console.log('Localess Client Options : ', options);
+    console.log(LOG_GROUP, 'Client Options : ', options);
   }
   const fetchOptions: RequestInit = {
     redirect: 'follow',
@@ -51,52 +54,64 @@ export function localessClient(options: LocalessClientOptions) {
 
     async getLinks(): Promise<Links> {
       if (options.debug) {
-        console.log('getLinks()');
+        console.log(LOG_GROUP, 'getLinks()');
       }
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/links?token=${options.token}`;
       if (options.debug) {
-        console.log('getLinks url : ', url);
+        console.log(LOG_GROUP, 'getLinks url : ', url);
       }
       const response = await fetch(url, fetchOptions)
+      if (options.debug) {
+        console.log(LOG_GROUP, 'getLinks status : ', response.status);
+      }
       const data = await response.json();
       return data as Links;
     },
 
     async getContentBySlug(slug: string): Promise<Content> {
       if (options.debug) {
-        console.log('getContentBySlug() slug : ', slug);
+        console.log(LOG_GROUP, 'getContentBySlug() slug : ', slug);
       }
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/slugs/${slug}?token=${options.token}${version}${locale}`;
       if (options.debug) {
-        console.log('getContentBySlug url : ', url);
+        console.log(LOG_GROUP, 'getContentBySlug url : ', url);
       }
       const response = await fetch(url, fetchOptions)
+      if (options.debug) {
+        console.log(LOG_GROUP, 'getContentBySlug status : ', response.status);
+      }
       const data = await response.json();
       return data as Content;
     },
 
     async getContentById(id: string): Promise<Content> {
       if (options.debug) {
-        console.log('getContentById() id : ', id);
+        console.log(LOG_GROUP, 'getContentById() id : ', id);
       }
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/${id}?token=${options.token}${version}${locale}`;
       if (options.debug) {
-        console.log('getContentById url : ', url);
+        console.log(LOG_GROUP, 'getContentById url : ', url);
       }
       const response = await fetch(url, fetchOptions)
+      if (options.debug) {
+        console.log(LOG_GROUP, 'getContentById status : ', response.status);
+      }
       const data = await response.json();
       return data as Content;
     },
 
     async getTranslations(): Promise<Translations> {
       if (options.debug) {
-        console.log('getTranslations()');
+        console.log(LOG_GROUP, 'getTranslations()');
       }
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/translations/${locale || 'en'}`;
       if (options.debug) {
-        console.log('getTranslations url : ', url);
+        console.log(LOG_GROUP, 'getTranslations url : ', url);
       }
       const response = await fetch(url, fetchOptions)
+      if (options.debug) {
+        console.log(LOG_GROUP, 'getTranslations status : ', response.status);
+      }
       const data = await response.json();
       return data as Translations;
     },
@@ -130,14 +145,4 @@ declare global {
   interface Window {
     localess?: LocalessSync;
   }
-}
-
-function proxyURIFromEnv(): string | undefined {
-  return (
-    process.env.HTTPS_PROXY ||
-    process.env.https_proxy ||
-    process.env.HTTP_PROXY ||
-    process.env.http_proxy ||
-    undefined
-  );
 }
