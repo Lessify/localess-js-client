@@ -32,13 +32,20 @@ yarn add @localess/js-client@latest
 import {localessClient} from "@localess/js-client";
 
 const llClient = localessClient({
-  origin: 'https://my-localess.web.app', // A fully qualified domain name with protocol (http/https) and port.
-  spaceId: 'I1LoVe2LocaLess4Rever', // Localess space ID, cna be found in the Localess Space settings
-  token: 'Baz00KaT0KeN8S3CureLL' // Localess API token, can be found in the Localess Space settings
+  // A fully qualified domain name with protocol (http/https) and port.
+  origin: 'https://my-localess.web.app',
+  // Localess space ID, cna be found in the Localess Space settings
+  spaceId: 'I1LoVe2LocaLess4Rever',
+  // Localess API token, can be found in the Localess Space settings
+  token: 'Baz00KaT0KeN8S3CureLL' 
 });
 
-llClient.getLinks() // Fetch all Content Links
-llClient.getContentBySlug('docs/overview') // Fetch content by SLUG
-llClient.getContentById('FRnIT7CUABoRCdSVVGGs') // Fetch content by ID
-llClient.getTranslations('en') // Fetch translations by locale
+// Fetch all Content Links
+llClient.getLinks()
+// Fetch content by SLUG
+llClient.getContentBySlug('docs/overview')
+// Fetch content by ID
+llClient.getContentById('FRnIT7CUABoRCdSVVGGs')
+// Fetch translations by locale
+llClient.getTranslations('en') 
 ````

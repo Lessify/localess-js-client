@@ -11,7 +11,7 @@
     "typescript"
   ],
   "author": "Lessify",
-  "homepage": "https://localess.org",
+  "homepage": "https://github.com/Lessify/localess-js-client",
   "sideEffects": false,
   "files": [
     "dist"
