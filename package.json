@@ -26,7 +26,8 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js",
       "node": "./dist/cjs/index.js"
-    }
+    },
+    "./models": "./dist/models/index.d.ts"
   },
   "repository": {
     "type": "git",
