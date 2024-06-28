@@ -21,6 +21,10 @@ export type LocalessClientOptions = {
    */
   token: string;
   /**
+   * Content version to fetch, leave empty for 'published' or 'draft' for the latest draft
+   */
+  version?: 'draft' | string;
+  /**
    * Enable debug mode
    */
   debug?: boolean;
@@ -28,7 +32,8 @@ export type LocalessClientOptions = {
 
 export type ContentFetchParams = {
   /**
-   * Content version to fetch, leave empty for 'published' or 'draft' for the latest draft
+   * Content version to fetch, leave empty for 'published' or 'draft' for the latest draft.
+   * Overrides the version set in the client options.
    */
   version?: 'draft' | string;
   /**
@@ -84,7 +89,13 @@ export function localessClient(options: LocalessClientOptions) {
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentBySlug() slug :', slug);
       }
-      const version = params?.version == 'draft'? `&version=${params.version}` : '';
+      let version = '';
+      if (options.version && options.version == 'draft') {
+        version = `&version=${options.version}`;
+      }
+      if (params?.version && params.version == 'draft') {
+        version = `&version=${params.version}`;
+      }
       const locale = params?.locale ? `&locale=${params.locale}` : '';
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/slugs/${slug}?token=${options.token}${version}${locale}`;
       if (options.debug) {
@@ -108,7 +119,13 @@ export function localessClient(options: LocalessClientOptions) {
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentById() id :', id);
       }
-      const version = params?.version == 'draft'? `&version=${params.version}` : '';
+      let version = '';
+      if (options.version && options.version == 'draft') {
+        version = `&version=${options.version}`;
+      }
+      if (params?.version && params.version == 'draft') {
+        version = `&version=${params.version}`;
+      }
       const locale = params?.locale ? `&locale=${params.locale}` : '';
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/${id}?token=${options.token}${version}${locale}`;
       if (options.debug) {
