@@ -73,7 +73,6 @@ export function localessClient(options: LocalessClientOptions) {
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/links?token=${options.token}`;
       if (options.debug) {
         console.log(LOG_GROUP, 'getLinks fetch url :', url);
-        console.log(LOG_GROUP, 'getLinks fetch options :', fetchOptions);
       }
       const response = await fetch(url, fetchOptions)
       if (options.debug) {
@@ -104,7 +103,6 @@ export function localessClient(options: LocalessClientOptions) {
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/slugs/${slug}?token=${options.token}${version}${locale}`;
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentBySlug fetch url :', url);
-        console.log(LOG_GROUP, 'getContentBySlug fetch options :', fetchOptions);
       }
       const response = await fetch(url, fetchOptions)
       if (options.debug) {
@@ -135,7 +133,6 @@ export function localessClient(options: LocalessClientOptions) {
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/${id}?token=${options.token}${version}${locale}`;
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentById fetch url :', url);
-        console.log(LOG_GROUP, 'getContentById fetch options :', fetchOptions);
       }
       const response = await fetch(url, fetchOptions)
       if (options.debug) {
@@ -156,7 +153,6 @@ export function localessClient(options: LocalessClientOptions) {
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/translations/${locale}`;
       if (options.debug) {
         console.log(LOG_GROUP, 'getTranslations fetch url :', url);
-        console.log(LOG_GROUP, 'getTranslations fetch options :', fetchOptions);
       }
       const response = await fetch(url, fetchOptions)
       if (options.debug) {
