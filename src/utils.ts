@@ -8,7 +8,6 @@ export function proxyURIFromEnv(): string | undefined {
   );
 }
 
-
 export const RESET = "\x1b[0m"
 export const BRIGHT = "\x1b[1m"
 export const DIM = "\x1b[2m"
