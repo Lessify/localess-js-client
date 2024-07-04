@@ -1,5 +1,5 @@
 import {ProxyAgent} from 'proxy-agent';
-import fetch, {RequestInit} from 'node-fetch';
+import fetch, {FetchError, RequestInit} from 'node-fetch';
 import {Content, ContentAsset, Links, Translations} from "./models";
 import {FG_BLUE, proxyURIFromEnv, RESET} from "./utils";
 
@@ -117,6 +117,7 @@ export function localessClient(options: LocalessClientOptions) {
         const data = await response.json();
         return data as Content;
       } catch (error){
+        console.error(LOG_GROUP, 'getContentBySlug error :', typeof error);
         console.error(LOG_GROUP, 'getContentBySlug error :', error);
         return {} as Content;
       }
