@@ -74,12 +74,17 @@ export function localessClient(options: LocalessClientOptions) {
       if (options.debug) {
         console.log(LOG_GROUP, 'getLinks fetch url :', url);
       }
-      const response = await fetch(url, fetchOptions)
-      if (options.debug) {
-        console.log(LOG_GROUP, 'getLinks status :', response.status);
+      try {
+        const response = await fetch(url, fetchOptions)
+        if (options.debug) {
+          console.log(LOG_GROUP, 'getLinks status :', response.status);
+        }
+        const data = await response.json();
+        return data as Links;
+      } catch (error){
+        console.error(LOG_GROUP, 'getLinks error :', error);
+        return {} as Links;
       }
-      const data = await response.json();
-      return data as Links;
     },
 
     /**
@@ -104,12 +109,17 @@ export function localessClient(options: LocalessClientOptions) {
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentBySlug fetch url :', url);
       }
-      const response = await fetch(url, fetchOptions)
-      if (options.debug) {
-        console.log(LOG_GROUP, 'getContentBySlug status :', response.status);
+      try {
+        const response = await fetch(url, fetchOptions)
+        if (options.debug) {
+          console.log(LOG_GROUP, 'getContentBySlug status :', response.status);
+        }
+        const data = await response.json();
+        return data as Content;
+      } catch (error){
+        console.error(LOG_GROUP, 'getContentBySlug error :', error);
+        return {} as Content;
       }
-      const data = await response.json();
-      return data as Content;
     },
 
     /**
