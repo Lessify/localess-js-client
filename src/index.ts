@@ -116,8 +116,8 @@ export function localessClient(options: LocalessClientOptions) {
         }
         const data = await response.json();
         return data as Content;
-      } catch (error){
-        console.error(LOG_GROUP, 'getContentBySlug error type :', typeof error);
+      } catch (error: any){
+        console.error(LOG_GROUP, 'getContentBySlug error code :', error.code, error.type, error.errno);
         console.error(LOG_GROUP, 'getContentBySlug error :', error);
         return {} as Content;
       }
