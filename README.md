@@ -37,7 +37,7 @@ const llClient = localessClient({
   // Localess space ID, cna be found in the Localess Space settings
   spaceId: 'I1LoVe2LocaLess4Rever',
   // Localess API token, can be found in the Localess Space settings
-  token: 'Baz00KaT0KeN8S3CureLL' 
+  token: 'Baz00KaT0KeN8S3CureLL'
 });
 
 // Fetch all Content Links

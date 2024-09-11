@@ -67,7 +67,7 @@ export function localessClient(options: LocalessClientOptions) {
       if (options.debug) {
         console.log(LOG_GROUP, 'getLinks()');
       }
-      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/links?token=${options.token}`;
+      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/links?includeChildren=true&token=${options.token}`;
       if (options.debug) {
         console.log(LOG_GROUP, 'getLinks url :', url);
       }
@@ -90,9 +90,6 @@ export function localessClient(options: LocalessClientOptions) {
         console.log(LOG_GROUP, 'getContentBySlug() slug :', slug);
       }
       let version = '';
-      if (options.version && options.version == 'draft') {
-        version = `&version=${options.version}`;
-      }
       if (params?.version && params.version == 'draft') {
         version = `&version=${params.version}`;
       }
@@ -120,9 +117,6 @@ export function localessClient(options: LocalessClientOptions) {
         console.log(LOG_GROUP, 'getContentById() id :', id);
       }
       let version = '';
-      if (options.version && options.version == 'draft') {
-        version = `&version=${options.version}`;
-      }
       if (params?.version && params.version == 'draft') {
         version = `&version=${params.version}`;
       }
