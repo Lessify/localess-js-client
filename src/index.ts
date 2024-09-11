@@ -1,5 +1,5 @@
 import {ProxyAgent} from 'proxy-agent';
-import fetch, {RequestInit} from 'node-fetch';
+import fetch, {FetchError, RequestInit} from 'node-fetch';
 import {Content, ContentAsset, Links, Translations} from "./models";
 import {FG_BLUE, proxyURIFromEnv, RESET} from "./utils";
 
@@ -44,16 +44,19 @@ export type ContentFetchParams = {
   locale?: string;
 }
 
-const LOG_GROUP = `${FG_BLUE}[Localess]${RESET}`
+const LOG_GROUP = `${FG_BLUE}[Localess:Client]${RESET}`
 
 export function localessClient(options: LocalessClientOptions) {
-  if(options.debug) {
+  if (options.debug) {
     console.log(LOG_GROUP, 'Client Options :', options);
   }
   const fetchOptions: RequestInit = {
     redirect: 'follow',
   };
   if (proxyURIFromEnv()) {
+    if (options.debug) {
+      console.log(LOG_GROUP, 'Proxy Agent Enabled');
+    }
     fetchOptions.agent = new ProxyAgent();
   }
 
@@ -69,14 +72,19 @@ export function localessClient(options: LocalessClientOptions) {
       }
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/links?includeChildren=true&token=${options.token}`;
       if (options.debug) {
-        console.log(LOG_GROUP, 'getLinks url :', url);
+        console.log(LOG_GROUP, 'getLinks fetch url :', url);
       }
-      const response = await fetch(url, fetchOptions)
-      if (options.debug) {
-        console.log(LOG_GROUP, 'getLinks status :', response.status);
+      try {
+        const response = await fetch(url, fetchOptions)
+        if (options.debug) {
+          console.log(LOG_GROUP, 'getLinks status :', response.status);
+        }
+        const data = await response.json();
+        return data as Links;
+      } catch (error){
+        console.error(LOG_GROUP, 'getLinks error :', error);
+        return {} as Links;
       }
-      const data = await response.json();
-      return data as Links;
     },
 
     /**
@@ -96,14 +104,19 @@ export function localessClient(options: LocalessClientOptions) {
       const locale = params?.locale ? `&locale=${params.locale}` : '';
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/slugs/${slug}?token=${options.token}${version}${locale}`;
       if (options.debug) {
-        console.log(LOG_GROUP, 'getContentBySlug url :', url);
+        console.log(LOG_GROUP, 'getContentBySlug fetch url :', url);
       }
-      const response = await fetch(url, fetchOptions)
-      if (options.debug) {
-        console.log(LOG_GROUP, 'getContentBySlug status :', response.status);
+      try {
+        const response = await fetch(url, fetchOptions)
+        if (options.debug) {
+          console.log(LOG_GROUP, 'getContentBySlug status :', response.status);
+        }
+        const data = await response.json();
+        return data as Content;
+      } catch (error: any){
+        console.error(LOG_GROUP, 'getContentBySlug error :', error);
+        return {} as Content;
       }
-      const data = await response.json();
-      return data as Content;
     },
 
     /**
@@ -123,7 +136,7 @@ export function localessClient(options: LocalessClientOptions) {
       const locale = params?.locale ? `&locale=${params.locale}` : '';
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/${id}?token=${options.token}${version}${locale}`;
       if (options.debug) {
-        console.log(LOG_GROUP, 'getContentById url :', url);
+        console.log(LOG_GROUP, 'getContentById fetch url :', url);
       }
       const response = await fetch(url, fetchOptions)
       if (options.debug) {
@@ -143,7 +156,7 @@ export function localessClient(options: LocalessClientOptions) {
       }
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/translations/${locale}`;
       if (options.debug) {
-        console.log(LOG_GROUP, 'getTranslations url :', url);
+        console.log(LOG_GROUP, 'getTranslations fetch url :', url);
       }
       const response = await fetch(url, fetchOptions)
       if (options.debug) {
