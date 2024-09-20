@@ -70,7 +70,7 @@ export function localessClient(options: LocalessClientOptions) {
       if (options.debug) {
         console.log(LOG_GROUP, 'getLinks()');
       }
-      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/links?includeChildren=true&token=${options.token}`;
+      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/links?token=${options.token}`;
       if (options.debug) {
         console.log(LOG_GROUP, 'getLinks fetch url :', url);
       }
