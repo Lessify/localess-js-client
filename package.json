@@ -1,6 +1,6 @@
 {
   "name": "@localess/js-client",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Universal JavaScript/TypeScript SDK for Localess's API.",
   "keywords": [
     "localess",
@@ -44,11 +44,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^3.0.0",
-    "proxy-agent": "^6.0.0"
+    "node-fetch": "^2.6.7",
+    "proxy-agent": "^6.3.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
+    "@types/node-fetch": "^2.5.12",
     "tsup": "^8.0.2",
     "typescript": "^5.0.0"
   },

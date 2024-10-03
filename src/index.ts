@@ -1,5 +1,5 @@
 import {ProxyAgent} from 'proxy-agent';
-import fetch, {FetchError, RequestInit} from 'node-fetch';
+import fetch, {RequestInit} from 'node-fetch';
 import {Content, ContentAsset, Links, Translations} from "./models";
 import {FG_BLUE, proxyURIFromEnv, RESET} from "./utils";
 
