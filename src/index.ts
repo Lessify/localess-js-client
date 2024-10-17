@@ -1,5 +1,5 @@
 import {ProxyAgent} from 'proxy-agent';
-import fetch, {FetchError, RequestInit} from 'node-fetch';
+import fetch, {RequestInit} from 'node-fetch';
 import {Content, ContentAsset, Links, Translations} from "./models";
 import {FG_BLUE, proxyURIFromEnv, RESET} from "./utils";
 
@@ -98,7 +98,9 @@ export function localessClient(options: LocalessClientOptions) {
         console.log(LOG_GROUP, 'getContentBySlug() slug :', slug);
       }
       let version = '';
-      if (params?.version && params.version == 'draft') {
+      if (options?.version && options.version == 'draft') {
+        version = `&version=${options.version}`;
+      } else if (params?.version && params.version == 'draft') {
         version = `&version=${params.version}`;
       }
       const locale = params?.locale ? `&locale=${params.locale}` : '';
@@ -130,7 +132,9 @@ export function localessClient(options: LocalessClientOptions) {
         console.log(LOG_GROUP, 'getContentById() id :', id);
       }
       let version = '';
-      if (params?.version && params.version == 'draft') {
+      if (options?.version && options.version == 'draft') {
+        version = `&version=${options.version}`;
+      } else if (params?.version && params.version == 'draft') {
         version = `&version=${params.version}`;
       }
       const locale = params?.locale ? `&locale=${params.locale}` : '';
