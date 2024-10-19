@@ -100,7 +100,8 @@ export function localessClient(options: LocalessClientOptions) {
       let version = '';
       if (options?.version && options.version == 'draft') {
         version = `&version=${options.version}`;
-      } else if (params?.version && params.version == 'draft') {
+      }
+      if (params?.version && params.version == 'draft') {
         version = `&version=${params.version}`;
       }
       const locale = params?.locale ? `&locale=${params.locale}` : '';
@@ -134,7 +135,8 @@ export function localessClient(options: LocalessClientOptions) {
       let version = '';
       if (options?.version && options.version == 'draft') {
         version = `&version=${options.version}`;
-      } else if (params?.version && params.version == 'draft') {
+      }
+      if (params?.version && params.version == 'draft') {
         version = `&version=${params.version}`;
       }
       const locale = params?.locale ? `&locale=${params.locale}` : '';
