@@ -30,6 +30,24 @@ export type LocalessClientOptions = {
   debug?: boolean;
 }
 
+export type LinksFetchParams = {
+  /**
+   * Content Kind. FOLDER or DOCUMENT. If not provided, it will return all.
+   * @example 'DOCUMENT'
+   */
+  kind?: 'DOCUMENT' | 'FOLDER';
+  /**
+   * Content parent slug.
+   * @example 'legal/policy'
+   */
+  parentSlug?: string;
+  /**
+   * If **true**, exclude all sub slugs, otherwise include all content under current selected **parent slug**.
+   * @example false
+   */
+  excludeChildren?: boolean;
+}
+
 export type ContentFetchParams = {
   /**
    * Content version to fetch, leave empty for 'published' or 'draft' for the latest draft.
@@ -48,7 +66,7 @@ const LOG_GROUP = `${FG_BLUE}[Localess:Client]${RESET}`
 
 export function localessClient(options: LocalessClientOptions) {
   if (options.debug) {
-    console.log(LOG_GROUP, 'Client Options :', options);
+    console.log(LOG_GROUP, 'Client Options : ', options);
   }
   const fetchOptions: RequestInit = {
     redirect: 'follow',
@@ -64,25 +82,38 @@ export function localessClient(options: LocalessClientOptions) {
 
     /**
      * Get all links
+     * @param params{LinksFetchParams} - Fetch parameters
      * @returns {Promise<Links>}
      */
-    async getLinks(): Promise<Links> {
+    async getLinks(params: LinksFetchParams): Promise<Links> {
       if (options.debug) {
-        console.log(LOG_GROUP, 'getLinks()');
+        console.log(LOG_GROUP, 'getLinks() params : ' + params);
       }
-      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/links?token=${options.token}`;
+      let kind = '';
+      if (params.kind) {
+        kind = `&kind=${params.kind}`;
+      }
+      let parentSlug = '';
+      if (params.parentSlug) {
+        parentSlug = `&parentSlug=${params.parentSlug}`;
+      }
+      let excludeChildren = '';
+      if (params.excludeChildren) {
+        excludeChildren = `&excludeChildren=${params.excludeChildren}`;
+      }
+      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/links?token=${options.token}${kind}${parentSlug}${excludeChildren}`;
       if (options.debug) {
-        console.log(LOG_GROUP, 'getLinks fetch url :', url);
+        console.log(LOG_GROUP, 'getLinks fetch url : ', url);
       }
       try {
         const response = await fetch(url, fetchOptions)
         if (options.debug) {
-          console.log(LOG_GROUP, 'getLinks status :', response.status);
+          console.log(LOG_GROUP, 'getLinks status : ', response.status);
         }
         const data = await response.json();
         return data as Links;
-      } catch (error){
-        console.error(LOG_GROUP, 'getLinks error :', error);
+      } catch (error) {
+        console.error(LOG_GROUP, 'getLinks error : ', error);
         return {} as Links;
       }
     },
@@ -95,29 +126,32 @@ export function localessClient(options: LocalessClientOptions) {
      */
     async getContentBySlug(slug: string, params?: ContentFetchParams): Promise<Content> {
       if (options.debug) {
-        console.log(LOG_GROUP, 'getContentBySlug() slug :', slug);
+        console.log(LOG_GROUP, 'getContentBySlug() slug : ', slug);
+        console.log(LOG_GROUP, 'getContentBySlug() params : ', params);
       }
       let version = '';
+      // Options
       if (options?.version && options.version == 'draft') {
         version = `&version=${options.version}`;
       }
+      // Params
       if (params?.version && params.version == 'draft') {
         version = `&version=${params.version}`;
       }
       const locale = params?.locale ? `&locale=${params.locale}` : '';
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/slugs/${slug}?token=${options.token}${version}${locale}`;
       if (options.debug) {
-        console.log(LOG_GROUP, 'getContentBySlug fetch url :', url);
+        console.log(LOG_GROUP, 'getContentBySlug fetch url : ', url);
       }
       try {
         const response = await fetch(url, fetchOptions)
         if (options.debug) {
-          console.log(LOG_GROUP, 'getContentBySlug status :', response.status);
+          console.log(LOG_GROUP, 'getContentBySlug status : ', response.status);
         }
         const data = await response.json();
         return data as Content;
-      } catch (error: any){
-        console.error(LOG_GROUP, 'getContentBySlug error :', error);
+      } catch (error: any) {
+        console.error(LOG_GROUP, 'getContentBySlug error : ', error);
         return {} as Content;
       }
     },
@@ -130,23 +164,26 @@ export function localessClient(options: LocalessClientOptions) {
      */
     async getContentById(id: string, params?: ContentFetchParams): Promise<Content> {
       if (options.debug) {
-        console.log(LOG_GROUP, 'getContentById() id :', id);
+        console.log(LOG_GROUP, 'getContentById() id : ', id);
+        console.log(LOG_GROUP, 'getContentById() params : ', params);
       }
       let version = '';
+      // Options
       if (options?.version && options.version == 'draft') {
         version = `&version=${options.version}`;
       }
+      // Params
       if (params?.version && params.version == 'draft') {
         version = `&version=${params.version}`;
       }
       const locale = params?.locale ? `&locale=${params.locale}` : '';
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/${id}?token=${options.token}${version}${locale}`;
       if (options.debug) {
-        console.log(LOG_GROUP, 'getContentById fetch url :', url);
+        console.log(LOG_GROUP, 'getContentById fetch url : ', url);
       }
       const response = await fetch(url, fetchOptions)
       if (options.debug) {
-        console.log(LOG_GROUP, 'getContentById status :', response.status);
+        console.log(LOG_GROUP, 'getContentById status : ', response.status);
       }
       const data = await response.json();
       return data as Content;
@@ -158,15 +195,15 @@ export function localessClient(options: LocalessClientOptions) {
      */
     async getTranslations(locale: string): Promise<Translations> {
       if (options.debug) {
-        console.log(LOG_GROUP, 'getTranslations()');
+        console.log(LOG_GROUP, 'getTranslations() locale : ', locale);
       }
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/translations/${locale}`;
       if (options.debug) {
-        console.log(LOG_GROUP, 'getTranslations fetch url :', url);
+        console.log(LOG_GROUP, 'getTranslations fetch url : ', url);
       }
       const response = await fetch(url, fetchOptions)
       if (options.debug) {
-        console.log(LOG_GROUP, 'getTranslations status :', response.status);
+        console.log(LOG_GROUP, 'getTranslations status : ', response.status);
       }
       const data = await response.json();
       return data as Translations;
