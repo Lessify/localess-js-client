@@ -85,20 +85,20 @@ export function localessClient(options: LocalessClientOptions) {
      * @param params{LinksFetchParams} - Fetch parameters
      * @returns {Promise<Links>}
      */
-    async getLinks(params: LinksFetchParams): Promise<Links> {
+    async getLinks(params?: LinksFetchParams): Promise<Links> {
       if (options.debug) {
         console.log(LOG_GROUP, 'getLinks() params : ' + params);
       }
       let kind = '';
-      if (params.kind) {
+      if (params?.kind) {
         kind = `&kind=${params.kind}`;
       }
       let parentSlug = '';
-      if (params.parentSlug) {
+      if (params?.parentSlug) {
         parentSlug = `&parentSlug=${params.parentSlug}`;
       }
       let excludeChildren = '';
-      if (params.excludeChildren) {
+      if (params?.excludeChildren) {
         excludeChildren = `&excludeChildren=${params.excludeChildren}`;
       }
       let url = `${options.origin}/api/v1/spaces/${options.spaceId}/links?token=${options.token}${kind}${parentSlug}${excludeChildren}`;
