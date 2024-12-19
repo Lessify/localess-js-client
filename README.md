@@ -26,7 +26,7 @@ npm install @localess/js-client@latest
 yarn add @localess/js-client@latest
 ````
 
-## Usage
+## Client
 
 ````ts
 import {localessClient} from "@localess/js-client";
@@ -48,6 +48,17 @@ llClient.getContentBySlug('docs/overview')
 llClient.getContentById('FRnIT7CUABoRCdSVVGGs')
 // Fetch translations by locale
 llClient.getTranslations('en') 
+````
+
+## Sync with Visual Editor
+
+It will automatically inject Localess Sync Script in to HTML page.
+
+````ts
+import {loadLocalessSync} from "@localess/js-client";
+
+// A fully qualified domain name with protocol (http/https) and port.
+loadLocalessSync('https://my-localess.web.app')
 ````
 
 ## Proxy
