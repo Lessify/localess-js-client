@@ -1,6 +1,6 @@
 {
   "name": "@localess/js-client",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Universal JavaScript/TypeScript SDK for Localess's API.",
   "keywords": [
     "localess",
@@ -27,7 +27,13 @@
       "default": "./dist/index.js",
       "node": "./dist/cjs/index.js"
     },
-    "./models": "./dist/models/index.d.ts"
+    "./models": {
+      "import": "./dist/models/index.js",
+      "require": "./dist/cjs/models/index.js",
+      "types":"./dist/models/index.d.ts",
+      "default": "./dist/models/index.js",
+      "node": "./dist/cjs/models/index.js"
+    }
   },
   "repository": {
     "type": "git",
