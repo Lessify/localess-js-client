@@ -1,6 +1,4 @@
-import {FG_BLUE, proxyURIFromEnv, RESET} from "./utils";
-import fetch, {RequestInit} from "node-fetch";
-import {ProxyAgent} from "proxy-agent";
+import {FG_BLUE, RESET} from "./utils";
 import {Content, ContentAsset, Links, Translations} from "./models";
 
 export type LocalessClientOptions = {
@@ -73,12 +71,12 @@ export function localessClient(options: LocalessClientOptions) {
   const fetchOptions: RequestInit = {
     redirect: 'follow',
   };
-  if (proxyURIFromEnv()) {
-    if (options.debug) {
-      console.log(LOG_GROUP, 'Proxy Agent Enabled');
-    }
-    fetchOptions.agent = new ProxyAgent();
-  }
+
+  const headers = new Headers();
+  headers.set('Content-Type', 'application/json');
+  headers.set('Accept', 'application/json');
+  headers.set('X-Localess-Agent', 'Localess-JS-Client');
+  headers.set('X-Localess-Agent-Version', '0.3.0');
 
   return {
 
