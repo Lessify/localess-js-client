@@ -70,13 +70,13 @@ export function localessClient(options: LocalessClientOptions) {
   }
   const fetchOptions: RequestInit = {
     redirect: 'follow',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-Localess-Agent': 'Localess-JS-Client',
+      'X-Localess-Agent-Version': '0.3.0'
+    }
   };
-
-  const headers = new Headers();
-  headers.set('Content-Type', 'application/json');
-  headers.set('Accept', 'application/json');
-  headers.set('X-Localess-Agent', 'Localess-JS-Client');
-  headers.set('X-Localess-Agent-Version', '0.3.0');
 
   return {
 

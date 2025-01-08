@@ -1,6 +1,6 @@
 {
   "name": "@localess/js-client",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Universal JavaScript/TypeScript SDK for Localess's API.",
   "keywords": [
     "localess",
@@ -16,18 +16,15 @@
   "files": [
     "dist"
   ],
-  "main": "dist/cjs/index.js",
-  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/cjs/index.js",
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.js",
-      "node": "./dist/cjs/index.js"
-    },
-    "./models": "./dist/models/index.d.ts"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
   },
   "repository": {
     "type": "git",
@@ -40,13 +37,12 @@
     "build": "npm run build:tsc && npm run build:cjs",
     "build:tsc": "tsc -p tsconfig.json",
     "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:tsup": "tsup-node --env.NODE_ENV production"
+    "build:tsup": "tsup src/index.ts --format cjs,esm --dts"
   },
   "license": "MIT",
-  "dependencies": {
-  },
   "devDependencies": {
     "@types/node": "^20.12.12",
+    "tsup": "^8.3.5",
     "typescript": "^5.0.0"
   },
   "engines": {

@@ -3,10 +3,22 @@ import {ContentLink} from "./content-link";
 import {ContentRichText} from "./content-rich-text";
 import {ContentReference} from "./content-reference";
 
+export type ContentDataField =
+  any |
+  string |
+  string[] |
+  number |
+  boolean |
+  ContentLink |
+  ContentRichText |
+  ContentData | ContentData[] |
+  ContentAsset | ContentAsset[] |
+  ContentReference | ContentReference[];
+
 /**
- * ContentData defined Object to connect all possible root Schemas.
+ * Content Data Schema related information.
  */
-export type ContentData = {
+export interface ContentDataSchema {
   /**
    * Unique identifier of a component in a content.
    */
@@ -15,8 +27,14 @@ export type ContentData = {
    * Unique identifier for the Schema object.
    */
   schema: string;
+}
+
+/**
+ * ContentData defined Object to connect all possible root Schemas.
+ */
+export interface ContentData extends ContentDataSchema {
   /**
    * Other Schema specific fields
    */
-  [key: string]: any | string | string[] | number | boolean | ContentAsset | ContentAsset[] | ContentLink | ContentReference | ContentReference[] | ContentRichText | ContentData | ContentData[] | undefined;
-};
+  [field: string]: ContentDataField | undefined;
+}
