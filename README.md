@@ -60,8 +60,3 @@ import {loadLocalessSync} from "@localess/js-client";
 // A fully qualified domain name with protocol (http/https) and port.
 loadLocalessSync('https://my-localess.web.app')
 ````
-
-## Proxy
-
-If you are behind a proxy, make sure to set the environment variables before using the client.
-The client will read environment variables to determine the PROXY (HTTPS_PROXY, https_proxy, HTTP_PROXY, http_proxy) and use it to make requests to the Localess API. 
