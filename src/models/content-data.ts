@@ -26,6 +26,10 @@ export interface ContentDataSchema {
   /**
    * Unique identifier for the Schema object.
    */
+  _schema: string;
+  /**
+   * Unique identifier for the Schema object.
+   */
   schema: string;
 }
 
