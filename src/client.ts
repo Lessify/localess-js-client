@@ -1,5 +1,5 @@
 import {FG_BLUE, RESET} from "./utils";
-import {Content, ContentAsset, Links, Translations} from "./models";
+import {Content, ContentAsset, ContentData, Links, Translations} from "./models";
 
 export type LocalessClientOptions = {
   /**
@@ -124,7 +124,7 @@ export function localessClient(options: LocalessClientOptions) {
      * @param params{ContentFetchParams} - Fetch parameters
      * @returns {Promise<Content>}
      */
-    async getContentBySlug(slug: string, params?: ContentFetchParams): Promise<Content> {
+    async getContentBySlug<T extends ContentData = ContentData>(slug: string, params?: ContentFetchParams): Promise<Content<T>> {
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentBySlug() slug : ', slug);
         console.log(LOG_GROUP, 'getContentBySlug() params : ', params);
@@ -149,10 +149,10 @@ export function localessClient(options: LocalessClientOptions) {
           console.log(LOG_GROUP, 'getContentBySlug status : ', response.status);
         }
         const data = await response.json();
-        return data as Content;
+        return data as Content<T>;
       } catch (error: any) {
         console.error(LOG_GROUP, 'getContentBySlug error : ', error);
-        return {} as Content;
+        return {} as Content<T>;
       }
     },
 
@@ -162,7 +162,7 @@ export function localessClient(options: LocalessClientOptions) {
      * @param params{ContentFetchParams} - Fetch parameters
      * @returns {Promise<Content>}
      */
-    async getContentById(id: string, params?: ContentFetchParams): Promise<Content> {
+    async getContentById<T extends ContentData = ContentData>(id: string, params?: ContentFetchParams): Promise<Content<T>> {
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentById() id : ', id);
         console.log(LOG_GROUP, 'getContentById() params : ', params);
@@ -186,7 +186,7 @@ export function localessClient(options: LocalessClientOptions) {
         console.log(LOG_GROUP, 'getContentById status : ', response.status);
       }
       const data = await response.json();
-      return data as Content;
+      return data as Content<T>;
     },
 
     /**
