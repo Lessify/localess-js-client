@@ -197,7 +197,7 @@ export function localessClient(options: LocalessClientOptions) {
       if (options.debug) {
         console.log(LOG_GROUP, 'getTranslations() locale : ', locale);
       }
-      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/translations/${locale}`;
+      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/translations/${locale}?token=${options.token}`;
       if (options.debug) {
         console.log(LOG_GROUP, 'getTranslations fetch url : ', url);
       }
