@@ -58,13 +58,48 @@ export type ContentFetchParams = {
   locale?: string;
 }
 
+export interface LocalessClient {
+  /**
+   * Get all links
+   * @param params{LinksFetchParams} - Fetch parameters
+   * @returns {Promise<Links>}
+   */
+  getLinks(params?: LinksFetchParams): Promise<Links>;
+
+  /**
+   * Get content by SLUG
+   * @param slug{string} - Content SLUG
+   * @param params{ContentFetchParams} - Fetch parameters
+   * @returns {Promise<Content>}
+   */
+  getContentBySlug<T extends ContentData = ContentData>(slug: string, params?: ContentFetchParams): Promise<Content<T>>;
+
+  /**
+   * Get content by ID
+   * @param id{string} - Content ID
+   * @param params{ContentFetchParams} - Fetch parameters
+   * @returns {Promise<Content>}
+   */
+  getContentById<T extends ContentData = ContentData>(id: string, params?: ContentFetchParams): Promise<Content<T>>;
+
+  /**
+   * Get translations for the given locale
+   * @param locale{string} - Locale identifier (ISO 639-1)
+   */
+  getTranslations(locale: string): Promise<Translations>;
+
+  syncScriptUrl(): string
+
+  assetLink(asset: ContentAsset | string): string
+}
+
 const LOG_GROUP = `${FG_BLUE}[Localess:Client]${RESET}`
 
 /**
  * Create a Localess API Client
  * @param {LocalessClientOptions} options connection details
  */
-export function localessClient(options: LocalessClientOptions) {
+export function localessClient(options: LocalessClientOptions): LocalessClient {
   if (options.debug) {
     console.log(LOG_GROUP, 'Client Options : ', options);
   }
@@ -74,17 +109,12 @@ export function localessClient(options: LocalessClientOptions) {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'X-Localess-Agent': 'Localess-JS-Client',
-      'X-Localess-Agent-Version': '0.3.0'
+      'X-Localess-Agent-Version': '0.6.0'
     }
   };
 
   return {
 
-    /**
-     * Get all links
-     * @param params{LinksFetchParams} - Fetch parameters
-     * @returns {Promise<Links>}
-     */
     async getLinks(params?: LinksFetchParams): Promise<Links> {
       if (options.debug) {
         console.log(LOG_GROUP, 'getLinks() params : ' + params);
@@ -118,12 +148,6 @@ export function localessClient(options: LocalessClientOptions) {
       }
     },
 
-    /**
-     * Get content by SLUG
-     * @param slug{string} - Content SLUG
-     * @param params{ContentFetchParams} - Fetch parameters
-     * @returns {Promise<Content>}
-     */
     async getContentBySlug<T extends ContentData = ContentData>(slug: string, params?: ContentFetchParams): Promise<Content<T>> {
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentBySlug() slug : ', slug);
@@ -156,12 +180,6 @@ export function localessClient(options: LocalessClientOptions) {
       }
     },
 
-    /**
-     * Get content by ID
-     * @param id{string} - Content ID
-     * @param params{ContentFetchParams} - Fetch parameters
-     * @returns {Promise<Content>}
-     */
     async getContentById<T extends ContentData = ContentData>(id: string, params?: ContentFetchParams): Promise<Content<T>> {
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentById() id : ', id);
@@ -189,10 +207,6 @@ export function localessClient(options: LocalessClientOptions) {
       return data as Content<T>;
     },
 
-    /**
-     * Get translations for the given locale
-     * @param locale{string} - Locale identifier (ISO 639-1)
-     */
     async getTranslations(locale: string): Promise<Translations> {
       if (options.debug) {
         console.log(LOG_GROUP, 'getTranslations() locale : ', locale);
