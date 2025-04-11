@@ -27,7 +27,7 @@ jobs:
       - name: Install 🔧
         run: npm install
       - name: Build 🏗️
-        run: npm run build:tsup
+        run: npm run build
       - name: Change version
         run: npm --no-git-tag-version version prerelease --preid next.$(date +'%Y%m%d-%H%M%S')
       - name: Publish package on NPM 📦

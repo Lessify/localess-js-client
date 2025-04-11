@@ -34,10 +34,7 @@
     "url": "https://github.com/Lessify/localess-js-client/issues"
   },
   "scripts": {
-    "build": "npm run build:tsc && npm run build:cjs",
-    "build:tsc": "tsc -p tsconfig.json",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:tsup": "tsup src/index.ts --format cjs,esm --dts"
+    "build": "tsup src/index.ts --format cjs,esm --dts"
   },
   "license": "MIT",
   "devDependencies": {
