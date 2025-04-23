@@ -1,5 +1,5 @@
 /**
- * Content Asset define reference to a Asset.
+ * Content Asset defines reference to an Asset.
  */
 export interface ContentAsset {
 

@@ -1,5 +1,5 @@
 /**
- * Content Reference define reference to a Content.
+ * Content Reference defines reference to a Content.
  */
 export interface ContentReference {
 

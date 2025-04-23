@@ -12,7 +12,7 @@ export function loadLocalessSync(origin: string, force: boolean = false) {
   const isSyncLoaded = typeof window.localess !== 'undefined';
   if (isSyncLoaded) return; // Skip if Sync is already loaded
   const scriptEl = document.getElementById(JS_SYNC_ID);
-  if (scriptEl) return; // Skip if script is already loaded
+  if (scriptEl) return; // Skip if a script is already loaded
   const script = document.createElement('script');
   script.id = JS_SYNC_ID;
   script.type = 'text/javascript';

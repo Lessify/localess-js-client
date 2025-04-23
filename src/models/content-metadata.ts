@@ -1,5 +1,5 @@
 /**
- * Content Metadata define short information about a Content for navigation reason.
+ * Content Metadata defines short information about a Content for navigation reason.
  */
 export interface ContentMetadata {
 

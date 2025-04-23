@@ -3,7 +3,7 @@ import {ContentMetadata} from "./content-metadata";
 import {Links} from "./links";
 
 /**
- * Content define shared object for all possible Content Types.
+ * Content defines a shared object for all possible Content Types.
  */
 export interface Content<T extends ContentData = ContentData> extends ContentMetadata {
   /**

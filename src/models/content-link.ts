@@ -9,7 +9,7 @@ export interface ContentLink {
   kind: 'LINK';
 
   /**
-   * Define the target of the link. _blank for new tab and _self for same tab.
+   * Define the target of the link. _blank for the new tab and _self for the same tab.
    */
   target: '_blank' | '_self';
 
@@ -19,7 +19,7 @@ export interface ContentLink {
   type: 'url' | 'content';
 
   /**
-   * If type is content, then it will be Content ID. Otherwise it will be URL.
+   * If the type is content, then it will be Content ID. Otherwise, it will be URL.
    */
   uri: string;
 }

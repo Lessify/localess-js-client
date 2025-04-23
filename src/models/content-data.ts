@@ -38,7 +38,7 @@ export interface ContentDataSchema {
  */
 export interface ContentData extends ContentDataSchema {
   /**
-   * Other Schema specific fields
+   * Other Schema-specific fields
    */
   [field: string]: ContentDataField | undefined;
 }

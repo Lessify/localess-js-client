@@ -52,7 +52,7 @@ llClient.getTranslations('en')
 
 ## Sync with Visual Editor
 
-It will automatically inject Localess Sync Script in to HTML page.
+It will automatically inject Localess Sync Script in to the HTML page.
 
 ````ts
 import {loadLocalessSync} from "@localess/js-client";
