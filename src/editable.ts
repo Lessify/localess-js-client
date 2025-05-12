@@ -6,3 +6,9 @@ export function llEditable(content: ContentDataSchema ) {
     'data-ll-schema': content._schema || content.schema,
   }
 }
+
+export function llEditableField(fieldName: string ) {
+  return {
+    'data-ll-field': fieldName,
+  }
+}
