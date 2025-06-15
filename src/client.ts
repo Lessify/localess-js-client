@@ -113,6 +113,9 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
     }
   };
 
+  // Cache for storing API responses
+  const cache = new Map<string, any>();
+
   return {
 
     async getLinks(params?: LinksFetchParams): Promise<Links> {
@@ -135,12 +138,25 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
       if (options.debug) {
         console.log(LOG_GROUP, 'getLinks fetch url : ', url);
       }
+
+      // Check if response is in cache
+      if (cache.has(url)) {
+        if (options.debug) {
+          console.log(LOG_GROUP, 'getLinks cache hit');
+        }
+        return cache.get(url) as Links;
+      }
+
       try {
         const response = await fetch(url, fetchOptions)
         if (options.debug) {
           console.log(LOG_GROUP, 'getLinks status : ', response.status);
         }
         const data = await response.json();
+
+        // Store response in cache
+        cache.set(url, data);
+
         return data as Links;
       } catch (error) {
         console.error(LOG_GROUP, 'getLinks error : ', error);
@@ -167,12 +183,25 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentBySlug fetch url : ', url);
       }
+
+      // Check if response is in cache
+      if (cache.has(url)) {
+        if (options.debug) {
+          console.log(LOG_GROUP, 'getContentBySlug cache hit');
+        }
+        return cache.get(url) as Content<T>;
+      }
+
       try {
         const response = await fetch(url, fetchOptions)
         if (options.debug) {
           console.log(LOG_GROUP, 'getContentBySlug status : ', response.status);
         }
         const data = await response.json();
+
+        // Store response in cache
+        cache.set(url, data);
+
         return data as Content<T>;
       } catch (error: any) {
         console.error(LOG_GROUP, 'getContentBySlug error : ', error);
@@ -199,12 +228,30 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentById fetch url : ', url);
       }
-      const response = await fetch(url, fetchOptions)
-      if (options.debug) {
-        console.log(LOG_GROUP, 'getContentById status : ', response.status);
+
+      // Check if response is in cache
+      if (cache.has(url)) {
+        if (options.debug) {
+          console.log(LOG_GROUP, 'getContentById cache hit');
+        }
+        return cache.get(url) as Content<T>;
       }
-      const data = await response.json();
-      return data as Content<T>;
+
+      try {
+        const response = await fetch(url, fetchOptions)
+        if (options.debug) {
+          console.log(LOG_GROUP, 'getContentById status : ', response.status);
+        }
+        const data = await response.json();
+
+        // Store response in cache
+        cache.set(url, data);
+
+        return data as Content<T>;
+      } catch (error: any) {
+        console.error(LOG_GROUP, 'getContentById error : ', error);
+        return {} as Content<T>;
+      }
     },
 
     async getTranslations(locale: string): Promise<Translations> {
@@ -215,12 +262,30 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
       if (options.debug) {
         console.log(LOG_GROUP, 'getTranslations fetch url : ', url);
       }
-      const response = await fetch(url, fetchOptions)
-      if (options.debug) {
-        console.log(LOG_GROUP, 'getTranslations status : ', response.status);
+
+      // Check if response is in cache
+      if (cache.has(url)) {
+        if (options.debug) {
+          console.log(LOG_GROUP, 'getTranslations cache hit');
+        }
+        return cache.get(url) as Translations;
       }
-      const data = await response.json();
-      return data as Translations;
+
+      try {
+        const response = await fetch(url, fetchOptions)
+        if (options.debug) {
+          console.log(LOG_GROUP, 'getTranslations status : ', response.status);
+        }
+        const data = await response.json();
+
+        // Store response in cache
+        cache.set(url, data);
+
+        return data as Translations;
+      } catch (error: any) {
+        console.error(LOG_GROUP, 'getTranslations error : ', error);
+        return {} as Translations;
+      }
     },
 
     syncScriptUrl(): string {
