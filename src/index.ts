@@ -3,12 +3,13 @@ export * from './client';
 export * from './editable';
 export * from './sync';
 
-export type EventToAppType = 'save' | 'publish' | 'input' | 'change' | 'enterSchema' | 'hoverSchema';
+type EventToAppType = 'save' | 'publish' | 'pong' | 'input' | 'change' | 'enterSchema' | 'hoverSchema';
 export type EventCallback = (event: EventToApp) => void;
 export type EventToApp =
-  { type: 'save' | 'publish' } |
+  { type: 'save' | 'publish' | 'pong' } |
   { type: 'input' | 'change'; data: any } |
   { type: 'enterSchema' | 'hoverSchema', id: string };
+
 export interface LocalessSync {
   on: (
     event: EventToAppType | EventToAppType[],
