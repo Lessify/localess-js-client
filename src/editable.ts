@@ -1,4 +1,4 @@
-import {ContentDataSchema} from "./models";
+import {ContentData, ContentDataSchema} from "./models";
 
 /**
  * Adds Localess editable attributes to a content item.
@@ -27,11 +27,11 @@ export function llEditable(content: ContentDataSchema ) {
 
 /**
  * Adds Localess editable field attribute to a specific field.
+ * Added type safety to ensure fieldName is a valid key of the content data excluding base schema fields.
  * @param fieldName
  * @returns An object containing data-ll-field attribute.
  */
-
-export function localessEditableField(fieldName: string ) {
+function localessEditableField<T extends ContentData = ContentData>(fieldName: Exclude<keyof T, keyof ContentDataSchema>) {
   return {
     'data-ll-field': fieldName,
   }
