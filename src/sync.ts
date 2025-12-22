@@ -1,3 +1,5 @@
+import {isIframe, isServer} from "./utils";
+
 const JS_SYNC_ID = 'localess-js-sync';
 
 /**
@@ -6,9 +8,8 @@ const JS_SYNC_ID = 'localess-js-sync';
  * @param {boolean} force Force Script Injection even if the application is not in Visual Editor.
  */
 export function loadLocalessSync(origin: string, force: boolean = false) {
-  const isServer = typeof window === 'undefined';
-  if (isServer) return; // Skip Server Injection
-  if (window.top === window.self) return; // Skip if the page is not loaded in Visual Editor
+  if (isServer()) return; // Skip Server Injection
+  if (!isIframe()) return; // Skip if the page is not loaded in Visual Editor
   const isSyncLoaded = typeof window.localess !== 'undefined';
   if (isSyncLoaded) return; // Skip if Sync is already loaded
   const scriptEl = document.getElementById(JS_SYNC_ID);
