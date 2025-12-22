@@ -31,7 +31,7 @@ export function llEditable(content: ContentDataSchema ) {
  * @param fieldName
  * @returns An object containing data-ll-field attribute.
  */
-function localessEditableField<T extends ContentData = ContentData>(fieldName: Exclude<keyof T, keyof ContentDataSchema>) {
+export function localessEditableField<T extends ContentData = ContentData>(fieldName: Exclude<keyof T, keyof ContentDataSchema>) {
   return {
     'data-ll-field': fieldName,
   }
