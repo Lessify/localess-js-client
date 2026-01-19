@@ -6,4 +6,5 @@ export * from './content-metadata';
 export * from './content-reference';
 export * from './content-rich-text';
 export * from './links';
+export * from './references';
 export * from './translations';

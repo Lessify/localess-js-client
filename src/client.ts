@@ -56,6 +56,14 @@ export type ContentFetchParams = {
    * Example: en
    */
   locale?: string;
+  /**
+   * Resolve references in the content data. Default is false.
+   */
+  resolveReference?: boolean;
+  /**
+   * Resolve links in the content data. Default is false.
+   */
+  resolveLink?: boolean;
 }
 
 export interface LocalessClient {
@@ -109,7 +117,7 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'X-Localess-Agent': 'Localess-JS-Client',
-      'X-Localess-Agent-Version': '0.6.0'
+      'X-Localess-Agent-Version': '0.8.0'
     }
   };
 
@@ -179,7 +187,9 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
         version = `&version=${params.version}`;
       }
       const locale = params?.locale ? `&locale=${params.locale}` : '';
-      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/slugs/${slug}?token=${options.token}${version}${locale}`;
+      const resolveReference = params?.resolveReference ? `&resolveReference=${params.resolveReference}` : '';
+      const resolveLink = params?.resolveLink ? `&resolveLink=${params.resolveLink}` : '';
+      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/slugs/${slug}?token=${options.token}${version}${locale}${resolveReference}${resolveLink}`;
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentBySlug fetch url : ', url);
       }
@@ -224,7 +234,9 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
         version = `&version=${params.version}`;
       }
       const locale = params?.locale ? `&locale=${params.locale}` : '';
-      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/${id}?token=${options.token}${version}${locale}`;
+      const resolveReference = params?.resolveReference ? `&resolveReference=${params.resolveReference}` : '';
+      const resolveLink = params?.resolveLink ? `&resolveLink=${params.resolveLink}` : '';
+      let url = `${options.origin}/api/v1/spaces/${options.spaceId}/contents/${id}?token=${options.token}${version}${locale}${resolveReference}${resolveLink}`;
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentById fetch url : ', url);
       }
