@@ -2,6 +2,7 @@ export * from './models';
 export * from './client';
 export * from './editable';
 export * from './sync';
+export {isBrowser, isServer, isIframe} from './utils';
 
 export type EventToAppType = 'save' | 'publish' | 'pong' | 'input' | 'change' | 'enterSchema' | 'hoverSchema';
 export type EventCallback = (event: EventToApp) => void;

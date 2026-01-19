@@ -117,7 +117,7 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'X-Localess-Agent': 'Localess-JS-Client',
-      'X-Localess-Agent-Version': '0.8.0'
+      'X-Localess-Agent-Version': '0.9.0'
     }
   };
 
@@ -128,7 +128,7 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
 
     async getLinks(params?: LinksFetchParams): Promise<Links> {
       if (options.debug) {
-        console.log(LOG_GROUP, 'getLinks() params : ' + params);
+        console.log(LOG_GROUP, 'getLinks() params : ', JSON.stringify(params));
       }
       let kind = '';
       if (params?.kind) {
@@ -175,7 +175,7 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
     async getContentBySlug<T extends ContentData = ContentData>(slug: string, params?: ContentFetchParams): Promise<Content<T>> {
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentBySlug() slug : ', slug);
-        console.log(LOG_GROUP, 'getContentBySlug() params : ', params);
+        console.log(LOG_GROUP, 'getContentBySlug() params : ', JSON.stringify(params));
       }
       let version = '';
       // Options
@@ -222,7 +222,7 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
     async getContentById<T extends ContentData = ContentData>(id: string, params?: ContentFetchParams): Promise<Content<T>> {
       if (options.debug) {
         console.log(LOG_GROUP, 'getContentById() id : ', id);
-        console.log(LOG_GROUP, 'getContentById() params : ', params);
+        console.log(LOG_GROUP, 'getContentById() params : ', JSON.stringify(params));
       }
       let version = '';
       // Options
