@@ -1,5 +1,6 @@
 import {FG_BLUE, RESET} from "./utils";
 import {Content, ContentAsset, ContentData, Links, Translations} from "./models";
+import {ICache, NoCache, TTLCache} from "./cache";
 
 export type LocalessClientOptions = {
   /**
@@ -24,6 +25,11 @@ export type LocalessClientOptions = {
    * Enable debug mode
    */
   debug?: boolean;
+  /**
+   * Cache TTL (time to live) for API responses. Default is 5 minutes (300000 ms).
+   * Set to false to disable caching.
+   */
+  cacheTTL?: number | false; // in milliseconds
 }
 
 export type LinksFetchParams = {
@@ -122,7 +128,7 @@ export function localessClient(options: LocalessClientOptions): LocalessClient {
   };
 
   // Cache for storing API responses
-  const cache = new Map<string, any>();
+  const cache: ICache<any> = options.cacheTTL === false ? new NoCache<any>() : new TTLCache<any>(options.cacheTTL);
 
   return {
 
